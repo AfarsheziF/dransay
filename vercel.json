@@ -1,0 +1,16 @@
+{
+  "buildCommand": "remix build",
+  "devCommand": "remix dev", 
+  "installCommand": "npm install",
+  "functions": {
+    "server.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/server.js"
+    }
+  ]
+}
