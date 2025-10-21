@@ -1,24 +1,44 @@
 #!/usr/bin/env node
-import { execSync } from "child_process";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
 
-// Minimal migration runner used by the package.json script `db:migrate`.
-// It simply invokes the locally-installed `drizzle-kit` binary via npx.
+// Migration runner for production deployment
 // Run with: `npm run db:migrate` (which calls `tsx src/db/migrate.ts`).
 
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl) {
-  console.warn(
-    "Warning: DATABASE_URL is not set. Make sure your environment provides it before running migrations."
+  console.error(
+    "Error: DATABASE_URL environment variable is required for migrations."
   );
-}
-
-try {
-  console.log("Running drizzle-kit migrate (via npx)...\n");
-  // Use shell:true to make this work across platforms (including Windows cmd.exe)
-  // execSync types are picky in TS; cast options to `any` for this small script.
-  execSync("npx drizzle-kit migrate", { stdio: "inherit", shell: true } as any);
-  console.log("Migration command finished.");
-} catch (err) {
-  console.error("Migration command failed:", err);
   process.exit(1);
 }
+
+// TypeScript now knows dbUrl is defined
+const connectionString: string = dbUrl;
+
+async function runMigrations() {
+  console.log("🔄 Starting database migrations...");
+  
+  // Create connection for migrations
+  const migrationClient = postgres(connectionString, { max: 1 });
+  const db = drizzle(migrationClient);
+
+  try {
+    await migrate(db, { migrationsFolder: "./drizzle" });
+    console.log("✅ Migrations completed successfully!");
+  } catch (error) {
+    // Check if it's just "no migrations to run"
+    if (error instanceof Error && error.message.includes("No migrations found")) {
+      console.log("ℹ️ No migrations to run - database is up to date");
+      return;
+    }
+    console.error("❌ Migration failed:", error);
+    process.exit(1);
+  } finally {
+    await migrationClient.end();
+  }
+}runMigrations().catch((err) => {
+  console.error("❌ Migration runner failed:", err);
+  process.exit(1);
+});
