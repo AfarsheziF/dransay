@@ -62,7 +62,7 @@ export default function Layout({ children, title }: LayoutProps) {
             </p>
             <div style={{ fontWeight: "bold", marginTop: "0.5rem" }}>
               <a
-                href="https://github.com/afarshezif/task-manager-interview-prep"
+                href="https://github.com/AfarsheziF/dransay"
                 target="_blank"
                 rel="noopener noreferrer"
               >
