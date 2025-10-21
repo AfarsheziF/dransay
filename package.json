@@ -4,7 +4,7 @@
   "description": "Full-stack interview preparation project with Remix, tRPC, and Drizzle",
   "type": "module",
   "scripts": {
-    "build": "remix build",
+    "build": "npm run db:generate && remix build",
     "dev": "cross-env NODE_OPTIONS=\"--no-deprecation\" remix dev --manual",
     "start": "remix-serve build/index.js",
     "typecheck": "tsc",
@@ -12,7 +12,7 @@
     "db:migrate": "tsx src/db/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx src/db/seed.ts",
-    "vercel-build": "remix build"
+    "vercel-build": "npm run db:generate && npm run db:migrate && remix build"
   },
   "dependencies": {
     "@remix-run/node": "2.16.7",
