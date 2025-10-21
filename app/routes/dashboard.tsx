@@ -1,5 +1,4 @@
 import { useLoaderData, useNavigation } from "@remix-run/react";
-import { useMemo } from "react";
 
 import { Task } from "src/db/schema";
 import { tasksLoader } from "~/utils/tasks.loaders";
