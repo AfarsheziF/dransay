@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app/routes/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/build/index.js"
+    }
+  ]
+}

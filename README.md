@@ -206,7 +206,25 @@ npm run db:migrate   # Run database migrations
 npm run db:seed      # Seed database with sample data
 npm run typecheck    # Run TypeScript checks
 npm run lint         # Run ESLint
+npm run vercel-build # Build for Vercel deployment
 ```
+
+## 🌐 Live Demo
+
+**🎯 Live Application**: [https://dransay-interview.vercel.app](https://dransay-interview.vercel.app)
+
+> **Note**: This is a live full-stack application running on Vercel with Neon PostgreSQL. 
+> All features including real-time updates, authentication, and database persistence are fully functional.
+
+### Demo Credentials
+- **Email**: demo@dransay.com  
+- **Password**: DemoPassword123!
+
+### Technical Stack in Production
+- **Frontend**: Vercel Edge Runtime
+- **Database**: Neon PostgreSQL (Serverless)
+- **API**: tRPC with automatic type safety
+- **Deployment**: Zero-downtime deployments via GitHub integration
 
 ## 🎯 Interview Talking Points
 
