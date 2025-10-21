@@ -10,6 +10,8 @@ export default defineConfig({
   plugins: [
     remix({
       presets: [vercelPreset()],
+      buildDirectory: "build",
+      serverBuildFile: "index.js",
     }),
     tsconfigPaths(),
   ],
