@@ -19,7 +19,7 @@ const connectionString: string = dbUrl;
 
 async function runMigrations() {
   console.log("🔄 Starting database migrations...");
-  
+
   // Create connection for migrations
   const migrationClient = postgres(connectionString, { max: 1 });
   const db = drizzle(migrationClient);
@@ -29,7 +29,10 @@ async function runMigrations() {
     console.log("✅ Migrations completed successfully!");
   } catch (error) {
     // Check if it's just "no migrations to run"
-    if (error instanceof Error && error.message.includes("No migrations found")) {
+    if (
+      error instanceof Error &&
+      error.message.includes("No migrations found")
+    ) {
       console.log("ℹ️ No migrations to run - database is up to date");
       return;
     }
@@ -38,7 +41,8 @@ async function runMigrations() {
   } finally {
     await migrationClient.end();
   }
-}runMigrations().catch((err) => {
+}
+runMigrations().catch((err) => {
   console.error("❌ Migration runner failed:", err);
   process.exit(1);
 });
