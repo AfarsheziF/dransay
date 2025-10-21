@@ -1,3 +1,8 @@
 {
-  "framework": "remix"
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/[...remix]"
+    }
+  ]
 }
