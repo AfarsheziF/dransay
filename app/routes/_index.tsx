@@ -7,7 +7,7 @@ export default function Index() {
         {/* Hero Section */}
         <div className="mb-12 animate-fadeIn">
           <h1 className="text-5xl font-extrabold text-white mb-6">
-            Welcome to Task Manager
+            Dransay Task Manager
           </h1>
           <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
             A modern, full-stack task management application built with Remix,
