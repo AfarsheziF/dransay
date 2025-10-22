@@ -227,7 +227,7 @@ npm run vercel-build # Build for Vercel deployment
 
 ## 🌐 Live Demo
 
-**🎯 Live Application**: [https://dransay-afarshezif-afarshezifs-projects.vercel.app/](https://dransay-afarshezif-afarshezifs-projects.vercel.app/)
+**🎯 Live Application**: [https://dransay.vercel.app/](https://dransay.vercel.app/)
 
 > **Note**: This is a live full-stack application running on Vercel with Neon PostgreSQL.
 > All features including real-time updates, authentication, and database persistence are fully functional.
