@@ -3,17 +3,47 @@ import { installGlobals } from "@remix-run/node";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { vercelPreset } from "@vercel/remix/vite";
+import { routes } from "remix/config";
 
-installGlobals();
+// installGlobals();
 // installGlobals({ nativeFetch: true });
+
+// export default defineConfig({
+//   plugins: [
+//     remix({
+//       presets: [vercelPreset()],
+//     }),
+//     tsconfigPaths(),
+//   ],
+// });
 
 export default defineConfig({
   plugins: [
-    remix({
-      presets: [vercelPreset()],
-    }),
+    // remixDevTools(),
+    remix({ routes, presets: [vercelPreset()] }),
     tsconfigPaths(),
+    // devServer({
+    //   exclude: [/^\/(resources)\/.+/],
+    // }),
+    // iconsSpritesheet({
+    //   inputDir: "./resources/icons",
+    //   outputDir: "./app/library/icon/icons",
+    //   withTypes: true,
+    //   fileName: "icon.svg",
+    // }),
   ],
+  build: {
+    target: "esnext",
+  },
+  // define: {
+  //   POSTHOG_API_KEY: JSON.stringify(process.env.POSTHOG_API_KEY),
+  //   POSTHOG_API_ENDPOINT: JSON.stringify(process.env.POSTHOG_API_ENDPOINT),
+  // },
+
+  server: {
+    open: true,
+    port: 3000,
+  },
 });
 
 // export default defineConfig({
