@@ -6,7 +6,8 @@
   "scripts": {
     "build": "remix vite:build",
     "build_1": "npm run db:generate && npm run db:migrate && remix vite:build",
-    "dev": "cross-env NODE_OPTIONS=\"--no-deprecation\" remix dev --manual",
+    "dev_1": "cross-env NODE_OPTIONS=\"--no-deprecation\" remix dev --manual",
+    "dev": "remix vite:dev",
     "start": "remix-serve build/index.js",
     "typecheck": "tsc",
     "db:generate": "drizzle-kit generate",
@@ -64,5 +65,8 @@
     "typescript": "^5.9.3",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
