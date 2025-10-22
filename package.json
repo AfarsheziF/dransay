@@ -4,7 +4,8 @@
   "description": "Full-stack interview preparation project with Remix, tRPC, and Drizzle",
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
+    "build": "npm run db:migrate && remix vite:build",
+    "build:local": "remix vite:build",
     "build_1": "npm run db:generate && npm run db:migrate && remix vite:build",
     "dev_1": "cross-env NODE_OPTIONS=\"--no-deprecation\" remix dev --manual",
     "dev": "remix vite:dev",
@@ -27,6 +28,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/remix": "2.10.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.5",
     "drizzle-orm": "^0.44.6",
     "i": "^0.3.7",
@@ -40,7 +42,7 @@
     "react-router-dom": "^7.9.4",
     "remix-custom-routes": "^1.0.1",
     "superjson": "^2.2.1",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^4.3.2",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -64,9 +66,17 @@
     "tsx": "^4.19.1",
     "typescript": "^5.9.3",
     "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.3.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.52.5"
+  },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }
