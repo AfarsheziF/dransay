@@ -2,16 +2,5 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "remix",
-  "functions": {
-    "build/index.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/build/index.js"
-    }
-  ]
+  "framework": "remix"
 }
