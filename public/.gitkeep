@@ -1,0 +1,2 @@
+# This file ensures the public directory is maintained in git
+# Static assets like images, fonts, and other files should be placed in this directory
