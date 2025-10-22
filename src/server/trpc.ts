@@ -47,22 +47,22 @@ const t = initTRPC.context<Context>().create({
 });
 
 // Middleware for authentication
-const isAuthenticated = t.middleware(({ ctx, next }) => {
-  if (!ctx.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
-  return next({
-    ctx: {
-      ...ctx,
-      userId: ctx.userId,
-    },
-  });
-});
+// const isAuthenticated = t.middleware(({ ctx, next }) => {
+//   if (!ctx.userId) {
+//     throw new TRPCError({ code: "UNAUTHORIZED" });
+//   }
+//   return next({
+//     ctx: {
+//       ...ctx,
+//       userId: ctx.userId,
+//     },
+//   });
+// });
 
 // Base procedures
 export const router = t.router;
 export const publicProcedure = t.procedure;
-export const protectedProcedure = t.procedure.use(isAuthenticated);
+// export const protectedProcedure = t.procedure.use(isAuthenticated);
 
 // Main app router
 export const appRouter = router({
@@ -162,7 +162,7 @@ export const appRouter = router({
 
   // Task procedures
   tasks: router({
-    getAll: protectedProcedure
+    getAll: publicProcedure
       .input(
         z
           .object({
@@ -189,7 +189,7 @@ export const appRouter = router({
           .orderBy(desc(tasks.createdAt));
       }),
 
-    create: protectedProcedure
+    create: publicProcedure
       .input(
         z.object({
           title: z.string().min(1),
@@ -211,7 +211,7 @@ export const appRouter = router({
         return newTask;
       }),
 
-    update: protectedProcedure
+    update: publicProcedure
       .input(
         z.object({
           id: z.number(),
@@ -245,7 +245,7 @@ export const appRouter = router({
         return updatedTask;
       }),
 
-    delete: protectedProcedure
+    delete: publicProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ ctx, input }) => {
         const [deletedTask] = await db
@@ -266,14 +266,14 @@ export const appRouter = router({
 
   // Category procedures
   categories: router({
-    getAll: protectedProcedure.query(async ({ ctx }) => {
+    getAll: publicProcedure.query(async ({ ctx }) => {
       return await db
         .select()
         .from(categories)
         .where(eq(categories.userId, ctx.userId!));
     }),
 
-    create: protectedProcedure
+    create: publicProcedure
       .input(
         z.object({
           name: z.string().min(1),
