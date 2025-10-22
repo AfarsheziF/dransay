@@ -4,7 +4,7 @@
   "description": "Full-stack interview preparation project with Remix, tRPC, and Drizzle",
   "type": "module",
   "scripts": {
-    "build": "npm run db:generate && npm run db:migrate && remix build",
+    "build": "remix build",
     "dev": "cross-env NODE_OPTIONS=\"--no-deprecation\" remix dev --manual",
     "start": "remix-serve build/index.js",
     "typecheck": "tsc",
