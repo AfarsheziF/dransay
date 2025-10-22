@@ -8,10 +8,9 @@ import postgres from "postgres";
 
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl) {
-  console.error(
-    "Error: DATABASE_URL environment variable is required for migrations."
-  );
-  process.exit(1);
+  console.log("⚠️  DATABASE_URL not found - skipping migrations (likely local build)");
+  console.log("Migrations will run during Vercel deployment with DATABASE_URL");
+  process.exit(0);
 }
 
 // TypeScript now knows dbUrl is defined
